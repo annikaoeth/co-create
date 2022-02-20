@@ -1,8 +1,9 @@
 // added by Annika Oeth
 var points = [];
-var total_points = 10;
+var total_points = 40;
 var triangles;
 var voronoiEdges = [];
+var voronoiShapes = new Map();
 
 function setup() {
   width = windowWidth;
@@ -11,8 +12,11 @@ function setup() {
   canvas.parent('sketch-container');
 
   // calculate new voronoi points
+  var widthRange = width + 300;
+  var heightRange = height + 300;
+
   for (var i = 0; i < total_points; ++i) {
-		points.push(new delaunay.Vertex(Math.floor(Math.random() * width), Math.floor(Math.random() * height)));
+		points.push(new delaunay.Vertex(Math.floor(Math.random() * widthRange), Math.floor(Math.random() * heightRange)));
 	}
 
 	triangles = delaunay.triangulate(points);
@@ -28,36 +32,211 @@ function setup() {
 function draw() {
 
   if (mouseIsPressed) {
-  //  fill(0);
+
+    // check which triangle mouse is inside and change color?
+
+
   } else {
   //  fill(255);
   }
 
-	strokeWeight(10);
+	strokeWeight(4);
 
 
   // change the frameRate?
 
 	points.forEach( function(p) {
-    point(p.x,p.y);
+  //  point(p.x,p.y);
   })
 
 
 
 	// print delaunay triangulation
-	// triangles.forEach( function(triangle) {
-	// 	line(triangle.v0.x, triangle.v0.y, triangle.v1.x, triangle.v1.y);
-	// 	line(triangle.v1.x, triangle.v1.y, triangle.v2.x, triangle.v2.y);
-	// 	line(triangle.v2.x, triangle.v2.y, triangle.v0.x, triangle.v0.y);
-  //
-	// })
+	triangles.forEach( function(triangle) {
+		// line(triangle.v0.x, triangle.v0.y, triangle.v1.x, triangle.v1.y);
+		// line(triangle.v1.x, triangle.v1.y, triangle.v2.x, triangle.v2.y);
+		// line(triangle.v2.x, triangle.v2.y, triangle.v0.x, triangle.v0.y);
+
+	})
 
 	// print voronoi diagram
 	voronoiEdges.forEach( function(edge) {
-    line(edge.v0.x, edge.v0.y, edge.v1.x, edge.v1.y);
+    //line(edge.v0.x, edge.v0.y, edge.v1.x, edge.v1.y);
+    //fill(edge.v0.x*20, 60, 60, 40);
 	})
 
+  voronoiShapes.forEach( function(setOfEdges,pointIndex) {
+    var p = points[pointIndex];
+    point(p.x,p.y);
 
+    console.log("drawing polygon around point (" + p.x + "," + p.y + ")");
+
+    beginShape();
+    let c = color( p.y%255, 0, p.x%255);
+
+    fill(c);
+    stroke( 204, 0, 250);
+
+    console.log("there are " + setOfEdges.length + " edges");
+
+    // print edges
+    for (var i = 0; i < setOfEdges.length; i++) {
+      var edge = setOfEdges[i];
+    //  console.log("edge : (" + edge.v0.x + "," + edge.v0.y + "), (" + edge.v1.x + "," + edge.v1.y + ")");
+    }
+
+    // sort setOfEdges to make sure that vertices are drawn in the correct order
+    var sortedEdges = sortSetofEdges(setOfEdges);
+
+    console.log("there are " + sortedEdges.length + " edges after sorting");
+
+
+    for (var i = 0; i < sortedEdges.length; i++) {
+      var edge = sortedEdges[i];
+      vertex(edge.v0.x, edge.v0.y);
+      vertex(edge.v1.x, edge.v1.y);
+
+      console.log("edge : (" + edge.v0.x + "," + edge.v0.y + "), (" + edge.v1.x + "," + edge.v1.y + ")");
+
+      //line(edge.v0.x, edge.v0.y, edge.v1.x, edge.v1.y);
+
+    }
+
+    endShape(CLOSE);
+
+    point(p.x,p.y);
+
+  })
+
+
+}
+// store a map from voronoi point index to a list of vertices that enclose the polygon surrounding a voronoi point
+function findPointIndex(p) {
+  // search points and find index
+  var found = 0;
+
+  for (var i = 0; i < total_points; i++) {
+    if (points[i].equals(p)) {
+      found = 1;
+      return i;
+    }
+  }
+
+  if (found == 0) {
+    console.log("error: cant find this point in points");
+  }
+
+  return -1;
+
+}
+
+// copied from BELOW and modified
+// Remove duplicate edges
+var uniqueEdges = function(edges) {
+  var uniqueEdges = [];
+  for(var i=0;i<edges.length;++i) {
+    var duplicates = false;
+
+    // // See if edge is unique
+    // for(var j=0;j<edges.length;++j) {
+    //   if(i != j && edges[i].equals(edges[j])) {
+    //     duplicates = true;
+    //
+    //     // add it since we want one of each edge (no duplicates)
+    //     //uniqueEdges.push(edges[i]);
+    //     break;
+    //   }
+    // }
+    var alreadyAdded = false;
+    // check if this edge exists in uniqueEdges
+    for (var j = 0; j < uniqueEdges.length; ++j) {
+      if (uniqueEdges[j].equals(edges[i])) {
+        alreadyAdded = true;
+      }
+    }
+    if ( !alreadyAdded) {
+      uniqueEdges.push(edges[i]);
+    }
+
+  }
+
+  return uniqueEdges;
+};
+
+// takes a set of edges and sorts them to make sure that vertices are drawn in the correct order
+function sortSetofEdges(edges) {
+
+
+  var setOfEdges = uniqueEdges(edges);
+
+//  console.log("there are " + setOfEdges.length + " edges after removing duplicates");
+
+  for (var i = 0; i < setOfEdges.length; i++) {
+    var edge1 = setOfEdges[i];
+
+    // if we are at the end of the array
+    if (i + 1 == setOfEdges.length) {
+      // check that that edge connects back to the first one
+      if (edge1.v1.equals(setOfEdges[0].v0)) {
+        // yay it worked we are done
+        console.log("successfully sorted edges!");
+        return setOfEdges;
+      }
+      else {
+        console.log("error: last edge does not meet up with first edge!");
+        // add another edge between them
+      //  setOfEdges.push(new delaunay.Edge(edge1.v1, setOfEdges[0].v0));
+        return setOfEdges;
+      }
+    }
+
+    // find the next edge that connects to this one without changing the
+    // orientation of this edge (so assume its sorted up to and including i)
+    for (var j = i + 1; j < setOfEdges.length; j++) {
+      var edge2 = setOfEdges[j];
+      // if the second vertex of edge1 is equal to a vertex of edge2, then they should be next to each other
+      if (edge1.v1.equals(edge2.v1) || edge1.v1.equals(edge2.v0)) {
+        // if edge1's second vertex is equal to edge2's second vertex
+        // check if we need to flip the orientation of edge2
+        if (edge1.v1.equals(edge2.v1)) {
+          // flip edge2
+          var v1 = edge2.v0;
+          edge2.v0 = edge2.v1;
+          edge2.v1 = v1;
+        }
+
+        if (edge1.v1.equals(edge2.v0)) {
+          // do nothing
+        }
+
+        // if they are already next to each other
+        if (j == i + 1) {
+          // just make sure edge2 is updated (in case it was flipped)
+          setOfEdges[j] = edge2;
+        }
+        else {
+          // then we need to shift things
+
+          // move everything from i + 1 to j - 1 to spots i + 2 to j
+          var tempEdge = edge2;
+          var tempEdge2 = edge2;
+          for (var k = i + 1; k < j + 1; k++) {
+            tempEdge = setOfEdges[k];
+            setOfEdges[k] = tempEdge2;
+            tempEdge2 = tempEdge;
+          }
+
+        }
+
+        // break out of for loop because we can go to next i now
+        break;
+      }
+
+
+    }
+  }
+
+  return setOfEdges;
 }
 
 function calculateVoronoi() {
@@ -82,12 +261,84 @@ function calculateVoronoi() {
 
 			// check edges and make sure its not the same triangle
       // if all 3 edges of triangle1 are shared, then its the same triangle so dont count it
-			if ((edge11.equals(edge21) && !edge12.equals(edge22)) || edge11.equals(edge22) || edge11.equals(edge23) ||
-          edge12.equals(edge21) || (edge12.equals(edge22) && !edge11.equals(edge21))|| edge12.equals(edge23) ||
-          edge13.equals(edge21) || edge13.equals(edge22) || (edge13.equals(edge23) && !edge12.equals(edge22))  ) {
+			if ((edge11.equals(edge21) && !edge12.equals(edge22)) || edge11.equals(edge22) || edge11.equals(edge23) ) {
         // add a line between circumcenters
-        voronoiEdges.push(new delaunay.Edge(triangle1.circumcenter(), triangle2.circumcenter()));
-        found1 = 1;
+        var newEdge = new delaunay.Edge(triangle1.circumcenter(), triangle2.circumcenter());
+        voronoiEdges.push(newEdge);
+
+        // add edge to map from voronoi points to edges in polygon surrounding it
+        var point1index = findPointIndex(triangle1.v0);
+         if (voronoiShapes.has(point1index) ) {
+           voronoiShapes.get(point1index).push(newEdge);
+         }
+         else {
+           var emptyEdges = [];
+           emptyEdges.push(newEdge);
+           voronoiShapes.set(point1index,emptyEdges);
+         }
+
+         var point2index = findPointIndex(triangle1.v1);
+          if (voronoiShapes.has(point2index) ) {
+            voronoiShapes.get(point2index).push(newEdge);
+          }
+          else {
+            var emptyEdges = [];
+            emptyEdges.push(newEdge);
+            voronoiShapes.set(point2index,emptyEdges);
+          }
+      }
+      if (edge12.equals(edge21) || (edge12.equals(edge22) && !edge11.equals(edge21))|| edge12.equals(edge23) ) {
+        // add a line between circumcenters
+        var newEdge = new delaunay.Edge(triangle1.circumcenter(), triangle2.circumcenter());
+        voronoiEdges.push(newEdge);
+
+        // add edge to map from voronoi points to edges in polygon surrounding it
+        var point1index = findPointIndex(triangle1.v1);
+         if (voronoiShapes.has(point1index) ) {
+           voronoiShapes.get(point1index).push(newEdge);
+         }
+         else {
+           var emptyEdges = [];
+           emptyEdges.push(newEdge);
+           voronoiShapes.set(point1index,emptyEdges);
+         }
+
+         var point2index = findPointIndex(triangle1.v2);
+          if (voronoiShapes.has(point2index) ) {
+            voronoiShapes.get(point2index).push(newEdge);
+          }
+          else {
+            var emptyEdges = [];
+            emptyEdges.push(newEdge);
+            voronoiShapes.set(point2index,emptyEdges);
+          }
+      }
+      if(edge13.equals(edge21) || edge13.equals(edge22) || (edge13.equals(edge23) && !edge12.equals(edge22))  ) {
+        // add a line between circumcenters
+        var newEdge = new delaunay.Edge(triangle1.circumcenter(), triangle2.circumcenter());
+        voronoiEdges.push(newEdge);
+
+        // add edge to map from voronoi points to edges in polygon surrounding it
+        var point1index = findPointIndex(triangle1.v2);
+         if (voronoiShapes.has(point1index) ) {
+           voronoiShapes.get(point1index).push(newEdge);
+         }
+         else {
+           var emptyEdges = [];
+           emptyEdges.push(newEdge);
+           voronoiShapes.set(point1index,emptyEdges);
+         }
+
+         var point2index = findPointIndex(triangle1.v0);
+          if (voronoiShapes.has(point2index) ) {
+            voronoiShapes.get(point2index).push(newEdge);
+          }
+          else {
+            var emptyEdges = [];
+            emptyEdges.push(newEdge);
+            voronoiShapes.set(point2index,emptyEdges);
+          }
+
       }
 
 		})
@@ -110,7 +361,7 @@ function calculateVoronoi() {
 			x: x,
 			y: y,
 			equals: function(vertex) {
-				return this.x === vertex.x && this.y == vertex.y;
+				return Math.floor(this.x) === Math.floor(vertex.x) && Math.floor(this.y) == Math.floor(vertex.y);
 			}
 		};
 	};
@@ -258,6 +509,7 @@ function calculateVoronoi() {
 	exports.Vertex = Vertex;
 	exports.Edge = Edge;
 	exports.Triangle = Triangle;
+
 
 	// Perform Delaunay Triangulation for array of vertices and return array of triangles
 	exports.triangulate = function(vertices) {
