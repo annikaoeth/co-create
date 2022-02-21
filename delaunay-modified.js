@@ -19,6 +19,8 @@ function setup() {
 		points.push(new delaunay.Vertex(Math.floor(Math.random() * widthRange), Math.floor(Math.random() * heightRange)));
 	}
 
+  points.push(new delaunay.Vertex(mouseX, mouseY));
+
 	triangles = delaunay.triangulate(points);
 
 	// make voronoi diagram
@@ -26,7 +28,7 @@ function setup() {
 
 
   // makes draw only get called once
-  noLoop();
+  //noLoop();
 }
 
 function draw() {
@@ -75,7 +77,8 @@ function draw() {
     let c = color( p.y%255, 0, p.x%255);
 
     fill(c);
-    stroke( 204, 0, 250);
+    //stroke( 204, 0, 250);
+    noStroke();
 
     console.log("there are " + setOfEdges.length + " edges");
 
@@ -110,6 +113,21 @@ function draw() {
 
 
 }
+
+function mouseMoved() {
+  triangles = [];
+  voronoiEdges = [];
+  voronoiShapes = new Map();
+
+  // remove last point and calculateVoronoi again
+  points[total_points] = new delaunay.Vertex(mouseX, mouseY);
+
+  triangles = delaunay.triangulate(points);
+
+	// make voronoi diagram
+  calculateVoronoi();
+
+}
 // store a map from voronoi point index to a list of vertices that enclose the polygon surrounding a voronoi point
 function findPointIndex(p) {
   // search points and find index
@@ -120,6 +138,11 @@ function findPointIndex(p) {
       found = 1;
       return i;
     }
+  }
+
+  if (points[total_points].equals(p)) {
+    found = 1;
+    return total_points;
   }
 
   if (found == 0) {
