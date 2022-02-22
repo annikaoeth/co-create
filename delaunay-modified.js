@@ -4,12 +4,35 @@ var total_points = 40;
 var triangles;
 var voronoiEdges = [];
 var voronoiShapes = new Map();
+var mouseIsPoint = true;
+
+// buttons
+let checkbox;
+
+// slider for color range
+let slider;
+let range = 150;
+
 
 function setup() {
   width = windowWidth;
   height = windowHeight;
   let canvas = createCanvas(width, height);
   canvas.parent('sketch-container');
+
+  // create a color picker
+  colorPicker = createColorPicker('#ed225d');
+  colorPicker.position(330, 30);
+
+  // add a checkbox for if mouse is a point
+  checkbox = createCheckbox('mouse is point', true);
+  checkbox.changed(checkMouseIsPoint);
+  checkbox.position(180, 30);
+
+  // create a slider for color range
+  slider = createSlider(0, 255, 150);
+  slider.position(410, 30);
+  slider.style('width', '80px');
 
   // calculate new voronoi points
   var widthRange = width + 300;
@@ -26,32 +49,22 @@ function setup() {
 	// make voronoi diagram
   calculateVoronoi();
 
-
   // makes draw only get called once
   //noLoop();
 }
 
 function draw() {
-
   if (mouseIsPressed) {
-
     // check which triangle mouse is inside and change color?
-
 
   } else {
   //  fill(255);
   }
 
-	strokeWeight(4);
-
+  //strokeWeight(4);
+  //stroke(51);
 
   // change the frameRate?
-
-	points.forEach( function(p) {
-  //  point(p.x,p.y);
-  })
-
-
 
 	// print delaunay triangulation
 	triangles.forEach( function(triangle) {
@@ -74,19 +87,34 @@ function draw() {
     console.log("drawing polygon around point (" + p.x + "," + p.y + ")");
 
     beginShape();
-    let c = color( p.y%255, 0, p.x%255);
+
+    range = slider.value();
+
+    // assign color based on x,y
+    //let c = color( p.y%255, 0, p.x%255);
+
+    // change color to be near the color of colorPicker (within 30-50 for each value)
+    let c = colorPicker.color();
+    // randomly change values to be close to color
+    // let redValue = red(c) + Math.floor(Math.random() * range);
+    // let greenValue = green(c) + Math.floor(Math.random() * range);
+    // let blueValue = blue(c) + Math.floor(Math.random() * range);
+
+    // change color based on x,y
+    let redValue = (red(c) + p.x%range)%256;
+    let greenValue = (green(c) + p.y%range)%256;
+    let blueValue = (blue(c) + p.x%(range/2) + p.y%(range/2))%256;
+
+    c.setRed(redValue);
+    c.setGreen(greenValue);
+    c.setBlue(blueValue);
+
 
     fill(c);
     //stroke( 204, 0, 250);
     noStroke();
 
     console.log("there are " + setOfEdges.length + " edges");
-
-    // print edges
-    for (var i = 0; i < setOfEdges.length; i++) {
-      var edge = setOfEdges[i];
-    //  console.log("edge : (" + edge.v0.x + "," + edge.v0.y + "), (" + edge.v1.x + "," + edge.v1.y + ")");
-    }
 
     // sort setOfEdges to make sure that vertices are drawn in the correct order
     var sortedEdges = sortSetofEdges(setOfEdges);
@@ -102,32 +130,67 @@ function draw() {
       console.log("edge : (" + edge.v0.x + "," + edge.v0.y + "), (" + edge.v1.x + "," + edge.v1.y + ")");
 
       //line(edge.v0.x, edge.v0.y, edge.v1.x, edge.v1.y);
-
     }
-
     endShape(CLOSE);
 
+    strokeWeight(4);
+    stroke(51);
     point(p.x,p.y);
 
   })
 
-
 }
 
-function mouseMoved() {
+// function that is called if "mouse is point" button is changed
+function checkMouseIsPoint() {
+
+  if (checkbox.checked()) {
+    console.log('Checking!');
+    mouseIsPoint = true;
+
+    // add mouse point back
+    points[total_points] = new delaunay.Vertex(mouseX, mouseY);
+  }
+  else {
+    console.log('Unchecking!');
+    mouseIsPoint = false;
+
+    // makes draw only get called once
+    noLoop();
+
+    // remove mouse point
+    delete points[total_points];
+  }
+
+  // recalculate everything
   triangles = [];
   voronoiEdges = [];
   voronoiShapes = new Map();
 
-  // remove last point and calculateVoronoi again
-  points[total_points] = new delaunay.Vertex(mouseX, mouseY);
-
   triangles = delaunay.triangulate(points);
 
-	// make voronoi diagram
+  // make voronoi diagram
   calculateVoronoi();
+}
+
+function mouseMoved() {
+  if (mouseIsPoint) {
+    // recalculate everything
+    triangles = [];
+    voronoiEdges = [];
+    voronoiShapes = new Map();
+
+    // remove last point
+    points[total_points] = new delaunay.Vertex(mouseX, mouseY);
+
+    triangles = delaunay.triangulate(points);
+
+    // make voronoi diagram
+    calculateVoronoi();
+  }
 
 }
+
 // store a map from voronoi point index to a list of vertices that enclose the polygon surrounding a voronoi point
 function findPointIndex(p) {
   // search points and find index
