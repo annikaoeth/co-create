@@ -11,7 +11,7 @@ let checkbox;
 
 // slider for color range
 let slider;
-let range = 150;
+let range = 50;
 
 
 function setup() {
