@@ -1,9 +1,17 @@
 // added by Annika Oeth
 var points = [];
-var total_points = 40;
+var total_points = 140;
 var triangles;
 var voronoiEdges = [];
 var voronoiShapes = new Map();
+
+// buttons
+let colors1;
+let colors2;
+let colors3;
+let colors4;
+let colors5;
+let colors6;
 
 function setup() {
   width = windowWidth;
@@ -11,15 +19,40 @@ function setup() {
   let canvas = createCanvas(width, height);
   canvas.parent('sketch-container');
 
+  // add checkboxes for different color schemes
+  colors1 = createCheckbox('colors 1', true);
+  colors1.changed(changeColors);
+  colors1.position(180, 30);
+
+  colors2 = createCheckbox('colors 2', false);
+  colors2.changed(changeColors);
+  colors2.position(410, 30);
+
+
   // calculate new voronoi points
   var widthRange = width + 300;
   var heightRange = height + 300;
+  // shift some points to be negative
+  var shift = 50;
+
 
   for (var i = 0; i < total_points; ++i) {
-		points.push(new delaunay.Vertex(Math.floor(Math.random() * widthRange), Math.floor(Math.random() * heightRange)));
+		points.push(new delaunay.Vertex(Math.floor(Math.random() * widthRange) - shift, Math.floor(Math.random() * heightRange) - shift));
 	}
 
   points.push(new delaunay.Vertex(mouseX, mouseY));
+
+  // make points past 4 corners every time
+  // points.push(new delaunay.Vertex(0,0));
+  // points.push(new delaunay.Vertex(0,height));
+  // points.push(new delaunay.Vertex(width,0));
+  // points.push(new delaunay.Vertex(width,height));
+
+  points.push(new delaunay.Vertex(-shift,-shift));
+  points.push(new delaunay.Vertex(-shift, height + shift));
+  points.push(new delaunay.Vertex(width + shift, -shift));
+  points.push(new delaunay.Vertex(width + shift,height + shift));
+
 
 	triangles = delaunay.triangulate(points);
 
@@ -84,7 +117,14 @@ function draw() {
     // let c = color( 0, p.x%255, p.y%255);
     //
     // let c = color( p.y%255, ((p.x + p.y)/2)%255 , p.x%255);
-     let c = color( p.x%255, ((p.x + p.y)/2)%255 , p.y%255);
+
+    let c;
+    if (colors1.checked()) {
+      c = color( p.x%255, ((p.x + p.y)/2)%255 , p.y%255);
+    }
+    if (colors2.checked()) {
+      c = color( 0, p.x%255, p.y%255);
+    }
 
     fill(c);
     //stroke( 204, 0, 250);
@@ -123,6 +163,10 @@ function draw() {
 
 
 }
+function changeColors() {
+
+  // re draw with different colors
+}
 
 function mouseMoved() {
   triangles = [];
@@ -143,17 +187,25 @@ function findPointIndex(p) {
   // search points and find index
   var found = 0;
 
-  for (var i = 0; i < total_points; i++) {
+  for (var i = 0; i < total_points + 5; i++) {
     if (points[i].equals(p)) {
       found = 1;
       return i;
     }
   }
 
-  if (points[total_points].equals(p)) {
-    found = 1;
-    return total_points;
-  }
+  // if (points[total_points].equals(p)) {
+  //   found = 1;
+  //   return total_points;
+  // }
+  //
+  // // 4 corners
+  // if (points[total_points].equals(p)) {
+  //   found = 1;
+  //   return total_points;
+  // }
+
+
 
   if (found == 0) {
     console.log("error: cant find this point in points");
