@@ -24,7 +24,7 @@ function setup() {
   colors1.changed(changeColors);
   colors1.position(180, 30);
 
-  colors2 = createCheckbox('colors 2', false);
+  colors2 = createCheckbox('colors 2', true);
   colors2.changed(changeColors);
   colors2.position(410, 30);
 
@@ -119,11 +119,17 @@ function draw() {
     // let c = color( p.y%255, ((p.x + p.y)/2)%255 , p.x%255);
 
     let c;
-    if (colors1.checked()) {
+    if (colors1.checked() && colors2.checked()) {
       c = color( p.x%255, ((p.x + p.y)/2)%255 , p.y%255);
     }
-    if (colors2.checked()) {
+    else if (colors1.checked()) {
+      c = color( p.y%255, 0, p.x%255);
+    }
+    else if (colors2.checked()) {
       c = color( 0, p.x%255, p.y%255);
+    }
+    else {
+      c = color( p.x%255, p.x%255, p.y%255);
     }
 
     fill(c);
