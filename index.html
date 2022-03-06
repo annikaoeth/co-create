@@ -21,42 +21,14 @@
                 Select a Demo
                 </button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <a class="dropdown-item" href="#" onclick = "change">Voronoi</a>
-                    <a class="dropdown-item" href="#" onclick = "">Demo 2</a>
+                    <a class="dropdown-item" href="#" onclick = "changeToVoronoi()">Voronoi</a>
+                    <a class="dropdown-item" href="#" onclick = "changeToDemo2()">Demo 2</a>
                     <a class="dropdown-item" href="#" onclick = "">Demo 3</a>
                     <a class="dropdown-item" href="#" onclick = "">Demo 4</a>
                     <a class="dropdown-item" href="#" onclick = "">Demo 5</a>
                 </div>
             </div>
 
-            <div class="parameters">
-                <label>put your own parameters menu somewhere over here?</label>
-                <div class="parameter">
-                    <label>sampleParam 1</label>
-                    <div class="dropdown">
-                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Select
-                        </button>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" href="#" onclick = ""> 1</a>
-                            <a class="dropdown-item" href="#" onclick = ""> 2</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="parameter">
-                <label>sampleParam 2</label>
-                    <div class="dropdown">
-                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Select
-                        </button>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" href="#" onclick = ""> 1</a>
-                            <a class="dropdown-item" href="#" onclick = ""> 2</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
         </div>
         <!-- render our demos in here -->
         <div id = "canvasArea">
@@ -75,10 +47,13 @@
   <!-- script to change demos -->
   <script>
     function changeToVoronoi() {
-      windowWidth
       document.getElementById('canvasArea').innerHTML = "<embed type="text/html" src="voronoi.html" width="1600" height="900">";
-      //$('#canvasArea').load("voronoi.html");
     }
+    // add your own functions like mine
+    function changeToDemo2() {
+      document.getElementById('canvasArea').innerHTML = "<embed type="text/html" src="voronoi.html" width="1600" height="900">";
+    }
+
 
   </script>
 
