@@ -1,20 +1,91 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/addons/p5.sound.min.js"></script>
-    <script src="math.js" type="text/javascript"></script>
-    <script type="text/javascript" src="delaunay-master/delaunay.js"></script>
+<html lang="en" dir="ltr">
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="utf-8">
+  <title>Co-Create Home Page</title>
 
-    <link rel="stylesheet" type="text/css" href="style.css">
-    <meta charset="utf-8" />
+  <!-- bootstrap -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.css">
+</head>
 
-  </head>
+<body>
+    <div class="pageTitle">
+        <h1>Co-Create</h1>
+    </div>
+    <!-- central display-->
+    <div class="centralDisplayArea">
+        <div class="sideMenuArea">
+            <div class="dropdown">
+                <button class="btn btn-outline-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Select a Demo
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" href="#" onclick = "change">Voronoi</a>
+                    <a class="dropdown-item" href="#" onclick = "">Demo 2</a>
+                    <a class="dropdown-item" href="#" onclick = "">Demo 3</a>
+                    <a class="dropdown-item" href="#" onclick = "">Demo 4</a>
+                    <a class="dropdown-item" href="#" onclick = "">Demo 5</a>
+                </div>
+            </div>
 
-  <body>
-    <script src="delaunay-simple.js"></script>
-    <h1>Co-Create</h1>
-      <div id="sketch-container"></div>
-	<p>Download</p>
-  </body>
+            <div class="parameters">
+                <label>put your own parameters menu somewhere over here?</label>
+                <div class="parameter">
+                    <label>sampleParam 1</label>
+                    <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Select
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="#" onclick = ""> 1</a>
+                            <a class="dropdown-item" href="#" onclick = ""> 2</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="parameter">
+                <label>sampleParam 2</label>
+                    <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Select
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="#" onclick = ""> 1</a>
+                            <a class="dropdown-item" href="#" onclick = ""> 2</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+        <!-- render our demos in here -->
+        <div id = "canvasArea">
+
+            <embed type="text/html" src="voronoi.html" width="1600" height="900">
+
+        </div>
+
+    </div>
+  <div class="BottomBanner">
+    <button class="btn btn-outline-primary btn-sm"s id="exportButton">
+        export
+    </button>
+</div>
+
+  <!-- script to change demos -->
+  <script>
+    function changeToVoronoi() {
+      windowWidth
+      document.getElementById('canvasArea').innerHTML = "<embed type="text/html" src="voronoi.html" width="1600" height="900">";
+      //$('#canvasArea').load("voronoi.html");
+    }
+
+  </script>
+
+  <!-- jquery -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+</body>
+
 </html>
