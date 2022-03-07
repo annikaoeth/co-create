@@ -1,7 +1,8 @@
 import './style.css'
 import * as THREE from 'three'
 import { MeshLine, MeshLineMaterial, MeshLineRaycast } from 'threeMeshline';
-import * as dat from 'dat.gui'
+import { GUI } from 'https://rawgit.com/mrdoob/three.js/dev/examples/jsm/libs/dat.gui.module.js';
+
 
 // /**
 //  * Base
@@ -62,7 +63,7 @@ var Params = function() {
 	}
 };
 const params = new Params()
-const gui = new dat.GUI()
+const gui = new GUI()
 
 
 window.addEventListener( 'load', function() {
