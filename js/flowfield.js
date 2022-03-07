@@ -1,7 +1,6 @@
 import './style.css'
 import * as THREE from 'three'
-import { MeshLine, MeshLineMaterial, MeshLineRaycast } from 'three.meshline';
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
+import { MeshLine, MeshLineMaterial, MeshLineRaycast } from 'threeMeshline';
 import * as dat from 'dat.gui'
 
 // /**
@@ -33,10 +32,6 @@ camera.position.y = 10
 camera.position.z = 0
 camera.lookAt(0,0,0)
 scene.add(camera)
-
-// Controls
-const controls = new OrbitControls(camera, canvas)
-controls.enableDamping = true
 
 /**
  * Renderer
@@ -85,9 +80,6 @@ window.addEventListener( 'load', function() {
     gui.add( params, 'opacity' ).onChange( update );
 	gui.add( params, 'animateDash' );
 } );
-
-
-
 
 const LineFolder = gui.addFolder('Lines')
 

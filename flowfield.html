@@ -8,10 +8,11 @@
   <body> 
     <h1>changed to webgl canvas</h1>
     <canvas class="webgl"></canvas>
-    <script src="js/three.js"></script>
-    <script src="js/THREE.MeshLine.js"></script>
-    <script type="text/javascript" src="js/dat.gui.min.js"></script>
-    <script src="js/THREE.MeshLine.js"></script>
+    <script type="module">
+        import three from 'https://cdn.skypack.dev/three';
+        import threeMeshline from 'https://cdn.skypack.dev/three.meshline';
+        import datGui from 'https://cdn.skypack.dev/dat.gui';
+    </script>
     <script type = "module" src="js/three/examples/jsm/controls/OrbitControls.js"></script>
     <script type="module" src="js/flowfield.js"></script>
   </body>
