@@ -30,10 +30,14 @@ function setup() {
   colors2.position(410, 30);
 
   // create a slider for number of points
-  slider = createSlider(0, 500, 140);
+  slider = createSlider(0, 200, 140);
   slider.position(610, 30);
   slider.style('width', '80px');
-  slider.changed(recalculateVoronoi);
+
+
+
+  fix this shit later
+//  slider.changed(recalculateVoronoi);
 
   // calculate new voronoi points
   var widthRange = width + 300;
@@ -59,9 +63,9 @@ function setup() {
   points.push(new delaunay.Vertex(width + shift, -shift));
   points.push(new delaunay.Vertex(width + shift,height + shift));
 
-
-	triangles = delaunay.triangulate(points);
-
+  var newTriangles = delaunay.triangulate(points);
+  triangles = newTriangles;
+  
 	// make voronoi diagram
   calculateVoronoi();
 
@@ -180,7 +184,7 @@ function draw() {
 function recalculateVoronoi() {
 
     // reset data structures
-    points = [];
+    var newPoints = [];
 
     total_points = slider.value();
 
@@ -192,10 +196,10 @@ function recalculateVoronoi() {
 
 
     for (var i = 0; i < total_points; ++i) {
-  		points.push(new delaunay.Vertex(Math.floor(Math.random() * widthRange) - shift, Math.floor(Math.random() * heightRange) - shift));
+  		newPoints.push(new delaunay.Vertex(Math.floor(Math.random() * widthRange) - shift, Math.floor(Math.random() * heightRange) - shift));
   	}
 
-    points.push(new delaunay.Vertex(mouseX, mouseY));
+    newPoints.push(new delaunay.Vertex(mouseX, mouseY));
 
     // make points past 4 corners every time
     // points.push(new delaunay.Vertex(0,0));
@@ -203,13 +207,15 @@ function recalculateVoronoi() {
     // points.push(new delaunay.Vertex(width,0));
     // points.push(new delaunay.Vertex(width,height));
 
-    points.push(new delaunay.Vertex(-shift,-shift));
-    points.push(new delaunay.Vertex(-shift, height + shift));
-    points.push(new delaunay.Vertex(width + shift, -shift));
-    points.push(new delaunay.Vertex(width + shift,height + shift));
+    newPoints.push(new delaunay.Vertex(-shift,-shift));
+    newPoints.push(new delaunay.Vertex(-shift, height + shift));
+    newPoints.push(new delaunay.Vertex(width + shift, -shift));
+    newPoints.push(new delaunay.Vertex(width + shift,height + shift));
 
 
-  	triangles = delaunay.triangulate(points);
+  	triangles = delaunay.triangulate(newPoints);
+
+    points = newPoints;
 
   	// make voronoi diagram
     calculateVoronoi();
