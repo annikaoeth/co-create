@@ -1,3 +1,4 @@
+
 *
 {
     /* margin: 0;
@@ -39,7 +40,7 @@
 
 .sideMenuArea{
   box-sizing: border-box;
-  width: 13%;
+  width: 30%;
   display: flex;
   flex-direction: column;
   /* align-items: Left;
