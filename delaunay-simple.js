@@ -14,7 +14,7 @@ let colors6;
 
 // slider for number of points
 let slider;
-var total_points = 140;
+var total_points = 50;
 
 function setup() {
   width = windowWidth;
@@ -30,7 +30,7 @@ function setup() {
   colors2.position(410, 30);
 
   // create a slider for number of points
-  slider = createSlider(0, 200, 140);
+  slider = createSlider(0, 100, 50);
   slider.position(610, 30);
   slider.style('width', '80px');
 
@@ -65,7 +65,7 @@ function setup() {
 
   var newTriangles = delaunay.triangulate(points);
   triangles = newTriangles;
-  
+
 	// make voronoi diagram
   calculateVoronoi();
 

@@ -10,7 +10,21 @@
   width: 100%;
   display: flex;
   flex-direction: row;
-  align-items:flex-start;
+/*   align-items:flex-start; */
+  flex-grow: 8;
+}
+.customizeForm {
+
+}
+.wrapper {
+  display: flex;
+  flex-direction: column;
+}
+.pageTitle{
+  flex-grow: 2;
+  background-color: rgba(61, 116, 168, 1);
+  font-size: 50px;
+
 }
 .canvasArea
 {
@@ -22,21 +36,24 @@
     border-color: azure;
     border-width: 10pt;
     border-style: solid;
-    min-height: 60vh;
+    /* min-height: 60vh; */
     margin: auto;
     padding: 2%;
     box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
-    width: 60%;
-    align-self: flex-end;
+    /* width: 60%; */
+    flex-grow: 9;
+    /* align-self: flex-end; */
 }
 
 .sideMenuArea{
   box-sizing: border-box;
-  width: 30%;
+  /* width: 30%; */
   display: flex;
   flex-direction: column;
-  align-items: Left;
-  justify-content: Left;
+  flex-grow: 1;
+  background-color: rgba(204, 230, 255, 1);
+  /* align-items: Left;
+  justify-content: Left; */
 }
 .exportButton{
   width: 50%;
