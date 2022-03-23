@@ -1,6 +1,5 @@
 // added by Annika Oeth
 var points = [];
-var total_points = 140;
 var triangles;
 var voronoiEdges = [];
 var voronoiShapes = new Map();
@@ -13,6 +12,10 @@ let colors4;
 let colors5;
 let colors6;
 
+// slider for number of points
+let slider;
+var total_points = 140;
+
 function setup() {
   width = windowWidth;
   height = windowHeight;
@@ -21,13 +24,16 @@ function setup() {
 
   // add checkboxes for different color schemes
   colors1 = createCheckbox('colors 1', true);
-  colors1.changed(changeColors);
   colors1.position(180, 30);
 
   colors2 = createCheckbox('colors 2', true);
-  colors2.changed(changeColors);
   colors2.position(410, 30);
 
+  // create a slider for number of points
+  slider = createSlider(0, 500, 140);
+  slider.position(610, 30);
+  slider.style('width', '80px');
+  slider.changed(recalculateVoronoi);
 
   // calculate new voronoi points
   var widthRange = width + 300;
@@ -169,9 +175,45 @@ function draw() {
 
 
 }
-function changeColors() {
 
-  // re draw with different colors
+// called when the slider changes the number of voronoi points
+function recalculateVoronoi() {
+
+    // reset data structures
+    points = [];
+
+    total_points = slider.value();
+
+    // calculate new voronoi points
+    var widthRange = width + 300;
+    var heightRange = height + 300;
+    // shift some points to be negative
+    var shift = 50;
+
+
+    for (var i = 0; i < total_points; ++i) {
+  		points.push(new delaunay.Vertex(Math.floor(Math.random() * widthRange) - shift, Math.floor(Math.random() * heightRange) - shift));
+  	}
+
+    points.push(new delaunay.Vertex(mouseX, mouseY));
+
+    // make points past 4 corners every time
+    // points.push(new delaunay.Vertex(0,0));
+    // points.push(new delaunay.Vertex(0,height));
+    // points.push(new delaunay.Vertex(width,0));
+    // points.push(new delaunay.Vertex(width,height));
+
+    points.push(new delaunay.Vertex(-shift,-shift));
+    points.push(new delaunay.Vertex(-shift, height + shift));
+    points.push(new delaunay.Vertex(width + shift, -shift));
+    points.push(new delaunay.Vertex(width + shift,height + shift));
+
+
+  	triangles = delaunay.triangulate(points);
+
+  	// make voronoi diagram
+    calculateVoronoi();
+
 }
 
 function mouseMoved() {
