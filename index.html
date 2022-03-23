@@ -21,7 +21,9 @@
                 Select a Demo
                 </button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <!-- <a class="dropdown-item" href="#" onclick = "changeToVoronoi()">Voronoi</a> -->
                     <a class="dropdown-item" href="#" onclick = "changeToVoronoi()">Voronoi</a>
+
                     <a class="dropdown-item" href="#" onclick = "changeToDemo2()">Demo 2</a>
                     <a class="dropdown-item" href="#" onclick = "">Demo 3</a>
                     <a class="dropdown-item" href="#" onclick = "">Demo 4</a>
@@ -33,11 +35,7 @@
         <!-- render our demos in here -->
         <div id = "canvasArea">
 
-          <!--
-          <embed type="text/html" src="voronoi.html" width="1600" height="900">
-          -->
-
-          <embed type="text/html" src="flowfield.html" width="1600" height="900">
+          <iframe src="voronoi.html" width="1600" height="900"></iframe>
         </div>
 
     </div>
@@ -50,11 +48,14 @@
   <!-- script to change demos -->
   <script>
     function changeToVoronoi() {
-      document.getElementById('canvasArea').innerHTML = "<embed type="text/html" src="voronoi.html" width="1600" height="900">";
+      const newHTML = '<iframe src="voronoi.html" width="1600" height="900"></iframe>';
+
+      document.getElementById('canvasArea').innerHTML = newHTML;
     }
     // add your own functions like mine
     function changeToDemo2() {
-      document.getElementById('canvasArea').innerHTML = "<embed type="text/html" src="flowfield.html" width="1600" height="900">";
+      const newHTML = '<embed type="text/html" src="flowfield.html" width="1600" height="900">';
+      document.getElementById('canvasArea').innerHTML = newHTML;
     }
 
 
