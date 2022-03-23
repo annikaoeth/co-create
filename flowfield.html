@@ -7,11 +7,12 @@
   </head>
   <body> 
     <h1>changed to webgl canvas</h1>
+	<script src="https://rawgit.com/mrdoob/three.js/dev/build/three.js"></script>
     <canvas class="webgl"></canvas>
-    <script src="js/three.js"></script>
-    <script src="js/THREE.MeshLine.js"></script>
-    <script type="text/javascript" src="js/dat.gui.min.js"></script>
-    <script src="js/THREE.MeshLine.js"></script>
+    <script type="module">
+        import threeMeshline from '"https://rawgit.com/spite/THREE.MeshLine/master/src/THREE.MeshLine.js";
+        import datGui from 'https://cdn.skypack.dev/dat.gui';
+    </script>
     <script type = "module" src="js/three/examples/jsm/controls/OrbitControls.js"></script>
     <script type="module" src="js/flowfield.js"></script>
   </body>
