@@ -36,7 +36,7 @@ function setup() {
 
 
 
-  fix this shit later
+//  fix this shit later
 //  slider.changed(recalculateVoronoi);
 
   // calculate new voronoi points
