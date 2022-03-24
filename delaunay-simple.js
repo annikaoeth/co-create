@@ -14,7 +14,7 @@ let colors6;
 
 // slider for number of points
 let slider;
-var total_points = 50;
+var total_points = 70;
 
 function setup() {
   width = windowWidth;
@@ -30,14 +30,14 @@ function setup() {
   colors2.position(410, 30);
 
   // create a slider for number of points
-  slider = createSlider(0, 100, 50);
+  slider = createSlider(0, 120, 70);
   slider.position(610, 30);
   slider.style('width', '80px');
 
 
 
 //  fix this shit later
-//  slider.changed(recalculateVoronoi);
+  slider.changed(recalculateVoronoi);
 
   // calculate new voronoi points
   var widthRange = width + 300;
