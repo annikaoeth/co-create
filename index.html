@@ -30,7 +30,7 @@
                     <a class="dropdown-item" href="#" onclick = "changeToVoronoi()">Voronoi</a>
 
                     <a class="dropdown-item" href="#" onclick = "changeToDemo2()">Flowfield</a>
-                    <a class="dropdown-item" href="#" onclick = "">Demo 3</a>
+                    <a class="dropdown-item" href="#" onclick = "changeToTrees()">Trees</a>
                     <a class="dropdown-item" href="#" onclick = "">Demo 4</a>
                     <a class="dropdown-item" href="#" onclick = "">Demo 5</a>
                 </div>
@@ -68,6 +68,10 @@
     // add your own functions like mine
     function changeToDemo2() {
       const newHTML = '<embed type="text/html" src="flowfield.html" width="1600" height="900">';
+      document.getElementById('canvasArea').innerHTML = newHTML;
+    }
+    function changeToTrees() {
+      const newHTML = '<embed type="text/html" src="treegen/index.html" width="100%" height="100%">';
       document.getElementById('canvasArea').innerHTML = newHTML;
     }
 
