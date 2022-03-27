@@ -1,0 +1,144 @@
+
+.centralDisplayArea{
+  /* margin: auto; */
+  /* padding: 0%; */
+  /* width: 80%; */
+  height: 90vh;
+  display: flex;
+  flex-direction: row;
+  /* align-items:flex-start; */
+}
+#canvasArea
+{
+    /* position: fixed; */
+    /* top: 0;
+    left: 0; */
+    /* background-color: white; */
+    box-sizing: border-box;
+    border-color: azure;
+    border-width: 10pt;
+    border-style: solid;
+    /* min-height: 60vh; */
+    /* margin: auto; */
+    /* padding: 0%; */
+    /* box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22); */
+    width: 100%;
+    /* align-self: flex-end; */
+}
+.pageTitle{
+  text-align: center;
+  min-height: 10%;
+  background-color: rgba(66, 101, 135, 1);
+
+}
+
+.sideMenuArea{
+  box-sizing: border-box;
+  width: 30%;
+  display: flex;
+  flex-direction: column;
+  /* align-items: Left;
+  justify-content: Left; */
+  background-color: rgba(204, 230, 255, 1);
+
+}
+.exportButton{
+  width: 50%;
+  display: flex;
+  align-items: center;
+}
+
+.parameters{
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+.parameter{
+  display: inline-flex;
+  flex-direction: row;
+  margin: 10 px;
+}
+
+
+.webgl
+{
+
+}
+#settings {
+    width: 100vw;
+    text-align: center;
+    margin: .1em 0;
+    padding: 0 0;
+
+}
+#settings > button {
+    font-size: 2em;
+    margin: 10px;
+}
+
+body{
+   /* overflow: visible;
+    margin: 0;
+    padding: 0;
+    background-color: rgb(243, 243, 243) */
+}
+  .pageTitle{
+    text-align: center;
+    color: #270e2c;
+    font-size: 2.5rem;
+    /* margin: auto; */
+    /* padding: 5%; */
+    display: flex;
+  }
+
+  .BottomBanner{
+    /* justify-content: flex-end; */
+    box-sizing: border-box;
+    width: 80%;
+    min-width: 300px;
+    /* margin: 0 auto; */
+    display: flex;
+  }
+  .active{
+    background-color: #ddd;
+  }
+
+  .hide{
+    /* visibility: hidden; */
+    display: none;
+  }
+
+
+  /* button styling for bootstrap buttons.
+  Use class btn-primary and secondary for neat looking buttons!! */
+  .btn-primary{
+    background-color: #3ABCA7;
+    border-color: #3ABCA7;
+  }
+
+  .btn-secondary, .btn-outline-primary{
+    background-color: white;
+    color: #3ABCA7;
+    border-color: #3ABCA7;
+  }
+
+  .btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open>.dropdown-toggle.btn-primary {
+    background-color: #2AAC97;
+    border-color: #2AAC97;
+  }
+
+  .btn-outline-primary:hover, .btn-outline-primary:focus, .btn-outline-primary:active, .btn-outline-primary.active, .open>.dropdown-toggle.btn-outline-primary {
+    background-color: #2AAC97;
+    border-color: #2AAC97;
+  }
+
+  .btn.btn-primary:disabled{
+    background-color: grey;
+    border-color: grey;
+  }
+
+  .bg-primary{
+    background-color: #3ABCA7!important;
+    color: white;
+    border-color: #3ABCA7;
+  }
