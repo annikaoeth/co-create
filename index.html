@@ -28,28 +28,27 @@
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                     <!-- <a class="dropdown-item" href="#" onclick = "changeToVoronoi()">Voronoi</a> -->
                     <a class="dropdown-item" href="#" onclick = "changeToVoronoi()">Voronoi</a>
-
                     <a class="dropdown-item" href="#" onclick = "changeToDemo2()">Flowfield</a>
                     <a class="dropdown-item" href="#" onclick = "">Demo 3</a>
                     <a class="dropdown-item" href="#" onclick = "">Demo 4</a>
                     <a class="dropdown-item" href="#" onclick = "">Demo 5</a>
                 </div>
             </div>
+
             <div class="customizeForm" >
-
-
-              <button class="btn btn-outline-primary btn-sm"s id="exportButton">
-                  export
+              <button class="btn btn-outline-primary btn-sm" id="exportButton">
+                export
               </button>
+              <button class="btn btn-outline-primary btn-sm" onclick="toggleGan()">
+                toggle GAN
+            </button>
             </div>
-
 
         </div>
         <!-- render our demos in here -->
         <div id = "canvasArea">
-
+          <img class="ganImage" src="http://47f4-2603-8000-ce42-5200-58c0-7a08-9e93-88b3.ngrok.io/"></img>
           <iframe src="voronoi.html" width="1600" height="900"></iframe>
-
         </div>
 
     </div>
@@ -71,7 +70,15 @@
       document.getElementById('canvasArea').innerHTML = newHTML;
     }
 
-
+    const ganImage = document.getElementsByClassName('ganImage')[0]
+    ganImage.style['visibility'] = 'visible';
+    function toggleGan() {
+      if (ganImage.style['visibility'] === 'visible') {
+        ganImage.style['visibility'] = 'hidden'
+      } else {
+        ganImage.style['visibility'] = 'visible'
+      }
+    }
   </script>
 
   <!-- jquery -->
