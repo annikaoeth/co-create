@@ -3,10 +3,40 @@
   /* margin: auto; */
   /* padding: 0%; */
   /* width: 80%; */
-  height: 90vh;
+  height: 79vh;
   display: flex;
   flex-direction: row;
   /* align-items:flex-start; */
+}
+.wrapper {
+  display: flex;
+  flex-direction: column;
+
+}
+.navigationBar {
+  display: flex;
+  flex-direction: row;
+  height: 9vh;
+  background-color: rgba(54, 54, 54, 1);
+}
+.navbar-item {
+  flex-grow: 1;
+  color: white;
+  text-align: center;
+  padding: 20px;
+  font-size: 20px;
+}
+/* Change color on hover */
+.navbar-item:hover {
+  background-color: #ddd;
+  color: black;
+}
+h1 {
+  color: white;
+  text-align: center;
+  width: 100%;
+  padding: 20px;
+  font-size: 50px;
 }
 #canvasArea
 {
@@ -27,14 +57,13 @@
 }
 .pageTitle{
   text-align: center;
-  min-height: 10%;
+  height: 12vh;
   background-color: rgba(66, 101, 135, 1);
-
 }
 
 .sideMenuArea{
   box-sizing: border-box;
-  width: 30%;
+  width: 20%;
   display: flex;
   flex-direction: column;
   /* align-items: Left;

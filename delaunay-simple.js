@@ -212,10 +212,10 @@ function recalculateVoronoi() {
     newPoints.push(new delaunay.Vertex(width + shift, -shift));
     newPoints.push(new delaunay.Vertex(width + shift,height + shift));
 
+    points = newPoints;
 
   	triangles = delaunay.triangulate(newPoints);
 
-    points = newPoints;
 
   	// make voronoi diagram
     calculateVoronoi();
