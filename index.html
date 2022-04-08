@@ -42,11 +42,15 @@
                     <a class="dropdown-item" href="#" onclick = "">Demo 5</a>
                 </div>
             </div>
-            <div class="customizeForm" >
 
-              <button class="btn btn-outline-primary btn-sm"s id="exportButton">
-                  export
+
+            <div class="customizeForm" >
+              <button class="btn btn-outline-primary btn-sm" id="exportButton">
+                export
               </button>
+              <button class="btn btn-outline-primary btn-sm" onclick="toggleGan()">
+                toggle GAN
+            </button>
             </div>
         </div> -->
 
@@ -56,6 +60,7 @@
 
           <iframe src="voronoi.html" width="100%" height="100%"></iframe>
 
+          <img class="ganImage" src="http://47f4-2603-8000-ce42-5200-58c0-7a08-9e93-88b3.ngrok.io/"></img>
         </div>
 
     </div>
@@ -81,7 +86,15 @@
       document.getElementById('canvasArea').innerHTML = newHTML;
     }
 
-
+    const ganImage = document.getElementsByClassName('ganImage')[0]
+    ganImage.style['visibility'] = 'visible';
+    function toggleGan() {
+      if (ganImage.style['visibility'] === 'visible') {
+        ganImage.style['visibility'] = 'hidden'
+      } else {
+        ganImage.style['visibility'] = 'visible'
+      }
+    }
   </script>
 
   <!-- jquery -->
