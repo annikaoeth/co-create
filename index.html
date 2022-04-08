@@ -17,23 +17,32 @@
     <div class="pageTitle">
         <h1>Co-Create</h1>
     </div>
+
+    <div class="navigationBar">
+      <a class="navbar-item" href="#" onclick = "changeToVoronoi()">Voronoi</a>
+
+      <a class="navbar-item" href="#" onclick = "changeToDemo2()">Flowfield</a>
+      <a class="navbar-item" href="#" onclick = "changeToTrees()">Trees</a>
+      <a class="navbar-item" href="#" onclick = "">Demo 4</a>
+      <a class="navbar-item" href="#" onclick = "">Demo 5</a>
+    </div>
     <!-- central display-->
     <div class="centralDisplayArea">
 
-        <div class="sideMenuArea">
+        <!-- <div class="sideMenuArea">
             <div class="dropdown">
                 <button class="btn btn-outline-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Select a Demo
                 </button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <!-- <a class="dropdown-item" href="#" onclick = "changeToVoronoi()">Voronoi</a> -->
                     <a class="dropdown-item" href="#" onclick = "changeToVoronoi()">Voronoi</a>
                     <a class="dropdown-item" href="#" onclick = "changeToDemo2()">Flowfield</a>
-                    <a class="dropdown-item" href="#" onclick = "">Demo 3</a>
+                    <a class="dropdown-item" href="#" onclick = "changeToTrees()">Trees</a>
                     <a class="dropdown-item" href="#" onclick = "">Demo 4</a>
                     <a class="dropdown-item" href="#" onclick = "">Demo 5</a>
                 </div>
             </div>
+
 
             <div class="customizeForm" >
               <button class="btn btn-outline-primary btn-sm" id="exportButton">
@@ -43,12 +52,15 @@
                 toggle GAN
             </button>
             </div>
+        </div> -->
 
-        </div>
+
         <!-- render our demos in here -->
         <div id = "canvasArea">
+
+          <iframe src="voronoi.html" width="100%" height="100%"></iframe>
+
           <img class="ganImage" src="http://47f4-2603-8000-ce42-5200-58c0-7a08-9e93-88b3.ngrok.io/"></img>
-          <iframe src="voronoi.html" width="1600" height="900"></iframe>
         </div>
 
     </div>
@@ -60,13 +72,17 @@
   <!-- script to change demos -->
   <script>
     function changeToVoronoi() {
-      const newHTML = '<iframe src="voronoi.html" width="1600" height="900"></iframe>';
+      const newHTML = '<iframe src="voronoi.html" width="100%" height="100%"></iframe>';
 
       document.getElementById('canvasArea').innerHTML = newHTML;
     }
     // add your own functions like mine
     function changeToDemo2() {
-      const newHTML = '<embed type="text/html" src="flowfield.html" width="1600" height="900">';
+      const newHTML = '<embed type="text/html" src="flowfield/flowfield.html" width="100%" height="100%">';
+      document.getElementById('canvasArea').innerHTML = newHTML;
+    }
+    function changeToTrees() {
+      const newHTML = '<embed type="text/html" src="treegen/index.html" width="100%" height="100%">';
       document.getElementById('canvasArea').innerHTML = newHTML;
     }
 

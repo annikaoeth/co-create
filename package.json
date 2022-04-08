@@ -1,0 +1,27 @@
+{
+  "name": "Co-Create",
+  "homepage": "https://annikaoeth.github.io/co-create/",
+  "version": "0.1.0",
+  "description": "Interactive generative art demos",
+  "author": "Ben W",
+  "license": "MIT",
+  "scripts": {
+    "dev": "budo treegen/src/index.js:bundle.js && budo flowfield/src/index.js:bundle.js",
+    "build": "browserify treegen/src/index.js -o treegen/bundle.js && browserify flowfield/src/index.js -o flowfield/bundle.js",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d ./",
+    "clean": "rm treegen/bundle.js"
+  },
+  "devDependencies": {
+    "browserify": "^14.5.0",
+    "budo": "^10.0.4",
+    "gh-pages": "^3.2.3"
+  },
+  "dependencies": {
+    "dat.gui": "^0.7.0",
+    "downloadjs": "^1.4.7",
+    "three": "^0.139.0",
+    "three-vignette-background": "^1.0.3",
+    "three.meshline": "^1.4.0"
+  }
+}
