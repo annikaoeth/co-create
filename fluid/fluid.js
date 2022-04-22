@@ -1,6 +1,6 @@
 hsvar N = 80;
 var iter = 4;
-var SCALE = 5;
+var SCALE = 10;
 
 class Fluid {
   constructor(dt, diff, visc) {
