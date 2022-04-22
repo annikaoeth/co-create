@@ -3,7 +3,7 @@ p5.disableFriendlyErrors = true;
 
 function setup() {
   // put setup code here
-  //colorMode(HSB);
+  colorMode(HSB);
   createCanvas(N * SCALE, N * SCALE);
   fluid = new Fluid(0.1, 0.000001, 0.000001);
 }
