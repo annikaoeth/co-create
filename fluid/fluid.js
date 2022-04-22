@@ -65,7 +65,7 @@ class Fluid {
         var y = j * SCALE;
         var d = this.density[IX(i, j)];
         //fill(d, 100, 100, 1);
-        fill(50,0,d,1);
+        fill(d,d,d,1);
         noStroke();
         square(x, y, SCALE);
       }
