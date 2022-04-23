@@ -25,6 +25,7 @@
       <a class="navbar-item" href="#" onclick = "changeToFluid()">Fluid Sim</a>
       <a class="navbar-item" href="#" onclick = "toggleGan()">Fractal Trees</a>
       <a class="navbar-item" href="#" onclick = "toggleGan()">Toggle GANcoin</a>
+      <a class="navbar-item" href="#" onclick = "changeToShader()">Shader</a>
     </div>
     <!-- central display-->
     <div class="centralDisplayArea">
@@ -88,6 +89,10 @@
     }
     function changeTo2DTrees(){
       const newHTML = '<embed type="text/html" src="2dtrees/index.html" width="100%" height="100%">';
+      document.getElementById('canvasArea').innerHTML = newHTML;
+    }
+    function changeToShader() {
+      const newHTML = '<embed type="text/html" src="shader/glsl.html" width="100%" height="100%">';
       document.getElementById('canvasArea').innerHTML = newHTML;
     }
     const ganImage = document.getElementsByClassName('ganImage')[0]
