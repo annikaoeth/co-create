@@ -182,6 +182,9 @@ function draw() {
 // called when the slider changes the number of voronoi points
 function recalculateVoronoi() {
 
+    triangles = [];
+    voronoiEdges = [];
+    voronoiShapes = new Map();
     // reset data structures
     var newPoints = [];
 
