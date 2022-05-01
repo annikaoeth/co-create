@@ -36,7 +36,6 @@ function setup() {
 
 
 
-//  fix this shit later
   slider.changed(recalculateVoronoi);
 
   // calculate new voronoi points
@@ -379,8 +378,9 @@ function sortSetofEdges(edges) {
 }
 
 function calculateVoronoi() {
-
-
+  // reset data structures
+  voronoiEdges = [];
+  voronoiShapes = new Map();
 
 	// if two triangles share a side, add a line between the two circumcenters to the graph
 	triangles.forEach( function(triangle1) {
