@@ -216,7 +216,8 @@ function recalculateVoronoi() {
 
     points = newPoints;
 
-  	triangles = delaunay.triangulate(newPoints);
+    var newTriangles = delaunay.triangulate(points);
+    triangles = newTriangles;
 
 
   	// make voronoi diagram
@@ -232,7 +233,8 @@ function mouseMoved() {
   // remove last point and calculateVoronoi again
   points[total_points] = new delaunay.Vertex(mouseX, mouseY);
 
-  triangles = delaunay.triangulate(points);
+  var newTriangles = delaunay.triangulate(points);
+  triangles = newTriangles;
 
 	// make voronoi diagram
   calculateVoronoi();
@@ -382,8 +384,8 @@ function sortSetofEdges(edges) {
 
 function calculateVoronoi() {
   // reset data structures
-  voronoiEdges = [];
-  voronoiShapes = new Map();
+  // voronoiEdges = [];
+  // voronoiShapes = new Map();
 
 	// if two triangles share a side, add a line between the two circumcenters to the graph
 	triangles.forEach( function(triangle1) {
