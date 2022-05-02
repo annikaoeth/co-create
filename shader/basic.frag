@@ -41,7 +41,7 @@ void main (void) {
     vec2 uv = gl_FragCoord.xy / resolution.xy;
 
     // constant pixel color
-    vec3 col =  vec3(pattern(uv,0.1), pattern(uv,3.0), pattern(uv,1.0));
+    vec3 col =  vec3(pattern(uv,0.1), pattern(uv, 3.0), pattern(uv,1.0));
 
     // Output to screen
     gl_FragColor = vec4(col, 1);
