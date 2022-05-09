@@ -1,4 +1,4 @@
-hsvar N = 80;
+var N = 80;
 var iter = 4;
 var SCALE = 5;
 
