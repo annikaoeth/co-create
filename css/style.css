@@ -18,23 +18,31 @@
   display: flex;
   flex-direction: row;
   height: 9%;
-  background-color: rgba(54, 54, 54, 1);
+  background-color: rgb(240,240,240);
 }
 .navbar-item {
   flex-grow: 1;
-  color: white;
+  color: black;
   text-align: center;
   padding: 16px;
   font-size: 20px;
+  transition: background-color .3s ease, box-shadow .3s ease;
+  /*
+  border: grey inset 3px;
+  border-radius: 3px;
+  */
+  box-shadow: rgba(0, 0, 0, 0) 0px 0px 0px;
 }
 /* Change color on hover */
 .navbar-item:hover {
-  background-color: #ddd;
+  background-color: #fff;
   color: black;
+  text-decoration:none;
+  box-shadow: rgba(0,0,0,0.4) 0px 0px 15px;
 }
 h1 {
-  color: white;
-  text-align: center;
+  color: black;
+  text-align: left;
   width: 100%;
   padding: 18px;
   font-size: 50px;
@@ -46,9 +54,7 @@ h1 {
     left: 0; */
     /* background-color: white; */
     box-sizing: border-box;
-    border-color: azure;
-    border-width: 10pt;
-    border-style: solid;
+    border: none;
     min-height: 79vh;
     /* margin: auto; */
     /* padding: 0%; */
@@ -60,18 +66,18 @@ h1 {
 .ganImage {
   pointer-events: none;
   position: absolute;
-  top: 50%;
-  left: 50%;
+  top: 30%;
+  left: 10%;
   margin-top:32px;
   height:128px;
   width:128px;
-  transform: translate(-50%, -50%);
+  opacity:.7
 }
 
 .pageTitle{
   text-align: center;
   height: 12%;
-  background-color: rgba(66, 101, 135, 1);
+  background-color: white;
 }
 
 .sideMenuArea{
@@ -126,7 +132,7 @@ body{
 }
   .pageTitle{
     text-align: center;
-    color: #270e2c;
+    color: black;
     font-size: 2.5rem;
     /* margin: auto; */
     /* padding: 5%; */
